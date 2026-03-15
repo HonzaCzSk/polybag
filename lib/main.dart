@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
+import 'app.dart';
+import 'theme.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(const PolyBagApp());
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class PolyBagApp extends StatelessWidget {
+  const PolyBagApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
+    return MaterialApp.router(
+      title: 'PolyBag',
+      theme: buildAppTheme(),
+      routerConfig: router,
+      debugShowCheckedModeBanner: false,
     );
   }
 }
