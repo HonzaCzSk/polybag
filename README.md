@@ -11,7 +11,7 @@
 Mobilní PWA (Progressive Web App) vytvořená ve Flutteru jako doplněk k e-shopu [polybag.cz](https://polybag.cz). Aplikace nabízí:
 
 | Sekce | Obsah |
-| --- | --- |
+|---|---|
 | 🪑 **Jak správně sedět** | Tipy na ergonomii, čemu se vyhnout |
 | 🏋️ **Kompenzační cvičení** | Cviky pro zdravá záda a správné držení těla |
 | 🛍️ **Nabídka produktů** | Podsedáky a sedací pytle z recyklovaných bigbagů |
@@ -58,7 +58,8 @@ Výstup je ve složce `build/web/` — nahraj obsah na server do `polybag.cz/app
 
 ## Struktura projektu
 
-```lib/
+```
+lib/
 ├── main.dart          # Entry point
 ├── app.dart           # GoRouter konfigurace
 ├── theme.dart         # Brand barvy a Material 3 téma
@@ -80,7 +81,7 @@ web/
 Aplikace používá barvy shodné s webem [polybag.cz](https://polybag.cz):
 
 | Název | Hex | Použití |
-| --- | --- | --- |
+|---|---|---|
 | Primary | `#40CDBB` | AppBar, tlačítka, aktivní ikony |
 | Background | `#FFFFFF` | Pozadí |
 | Secondary | `#D6F5F1` | Karty, rámy |
@@ -91,4 +92,4 @@ Aplikace používá barvy shodné s webem [polybag.cz](https://polybag.cz):
 
 ## Licence
 
-MIT © HonzaCzSk
+MIT © [PolyBag](https://polybag.cz)

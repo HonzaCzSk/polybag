@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'screens/home_screen.dart';
 import 'screens/sitting_screen.dart';
 import 'screens/exercises_screen.dart';
 import 'screens/products_screen.dart';
@@ -6,8 +7,15 @@ import 'screens/about_screen.dart';
 import 'widgets/nav_shell.dart';
 
 final router = GoRouter(
-  initialLocation: '/sedeni',
+  initialLocation: '/',
   routes: [
+    // Home — standalone, no bottom nav
+    GoRoute(
+      path: '/',
+      builder: (context, state) => const HomeScreen(),
+    ),
+
+    // Main app — bottom nav shell
     ShellRoute(
       builder: (context, state, child) => NavShell(child: child),
       routes: [

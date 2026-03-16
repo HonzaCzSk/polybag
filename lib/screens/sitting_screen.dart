@@ -1,7 +1,21 @@
 import 'package:flutter/material.dart';
+import '../utils/seo.dart';
 
-class SittingScreen extends StatelessWidget {
+class SittingScreen extends StatefulWidget {
   const SittingScreen({super.key});
+  @override
+  State<SittingScreen> createState() => _SittingScreenState();
+}
+
+class _SittingScreenState extends State<SittingScreen> {
+  @override
+  void initState() {
+    super.initState();
+    SeoHelper.set(
+      title: 'Jak správně sedět – PolyBag',
+      description: 'Tipy na ergonomii, správné držení těla a čemu se vyhnout při dlouhém sezení.',
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

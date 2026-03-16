@@ -1,8 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../utils/seo.dart';
 
-class AboutScreen extends StatelessWidget {
+class AboutScreen extends StatefulWidget {
   const AboutScreen({super.key});
+  @override
+  State<AboutScreen> createState() => _AboutScreenState();
+}
+
+class _AboutScreenState extends State<AboutScreen> {
+  @override
+  void initState() {
+    super.initState();
+    SeoHelper.set(
+      title: 'O nás – PolyBag',
+      description: 'Příběh značky PolyBag. Udržitelné produkty z recyklovaných bigbagů, Hradec Králové.',
+    );
+  }
 
   Future<void> _launch(String url) async {
     final uri = Uri.parse(url);

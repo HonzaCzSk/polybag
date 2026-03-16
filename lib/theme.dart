@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 
 // PolyBag brand palette — teal from logo, white backgrounds
@@ -19,7 +21,6 @@ ThemeData buildAppTheme() {
     onPrimary: PolyBagColors.primaryText,
     secondary: PolyBagColors.secondary,
     onSecondary: PolyBagColors.secondaryText,
-    // ignore: deprecated_member_use
     background: PolyBagColors.background,
     surface: PolyBagColors.surface,
     error: PolyBagColors.error,
@@ -46,7 +47,6 @@ ThemeData buildAppTheme() {
 
     navigationBarTheme: NavigationBarThemeData(
       backgroundColor: PolyBagColors.background,
-      // ignore: deprecated_member_use
       indicatorColor: PolyBagColors.primary.withOpacity(0.15),
       iconTheme: WidgetStateProperty.resolveWith((states) {
         if (states.contains(WidgetState.selected)) {
