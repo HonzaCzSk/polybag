@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../theme.dart';
+import '../utils/constants.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -21,8 +22,8 @@ class HomeScreen extends StatelessWidget {
               // Logo + title
               Row(
                 children: [
-                  Image.network(
-                    'https://polybag.cz/wp-content/uploads/2025/11/poly_bag_logo_5000x5000-scaled.png',
+                  Image.asset(
+                    'assets/images/Icon-192.png',
                     width: 52,
                     height: 52,
                     errorBuilder: (_, __, ___) => Container(
@@ -39,14 +40,14 @@ class HomeScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'PolyBag',
+                        PolyBagStrings.appTitle,
                         style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                           fontWeight: FontWeight.w800,
                           color: PolyBagColors.primary,
                         ),
                       ),
                       Text(
-                        'Zdravé sezení',
+                        PolyBagStrings.healthySitting,
                         style: Theme.of(context).textTheme.bodySmall,
                       ),
                     ],
@@ -55,7 +56,7 @@ class HomeScreen extends StatelessWidget {
               ),
               const SizedBox(height: 32),
               Text(
-                'Co tě zajímá?',
+                PolyBagStrings.whatInterestsYou,
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               const SizedBox(height: 16),
@@ -131,7 +132,7 @@ class _MenuCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: color.withOpacity(0.35),
+              color: color.withValues(alpha: color.alpha * 0.35), // Fix deprecation
               blurRadius: 12,
               offset: const Offset(0, 6),
             ),
@@ -159,7 +160,7 @@ class _MenuCard extends StatelessWidget {
                 Text(
                   subtitle,
                   style: TextStyle(
-                    color: Colors.white.withOpacity(0.8),
+                    color: Colors.white.withValues(alpha: 0.8), // Fix deprecation
                     fontSize: 12,
                   ),
                 ),
@@ -171,3 +172,4 @@ class _MenuCard extends StatelessWidget {
     );
   }
 }
+

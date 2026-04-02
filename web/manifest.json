@@ -1,6 +1,6 @@
 {
-  "name": "PolyBag – Zdravé sezení",
-  "short_name": "PolyBag",
+  "name": "PolyBag App",
+  "short_name": "PolyBag App",
   "description": "Jak správně sedět, cvičení a produkty PolyBag.",
   "start_url": "/app/",
   "display": "standalone",
