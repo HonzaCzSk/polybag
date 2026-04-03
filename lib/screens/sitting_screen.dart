@@ -1,7 +1,6 @@
 // ignore_for_file: unnecessary_to_list_in_spreads
 
 import 'package:flutter/material.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import '../../utils/seo.dart';
 import '../../utils/constants.dart';
 import '../../theme.dart';
@@ -43,43 +42,55 @@ class _SittingScreenState extends State<SittingScreen> {
           ...PolyBagStrings.sittingTips.map((tip) => Card(
             child: Padding(
               padding: const EdgeInsets.all(16),
-              child: Row(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(12),
-                    child: CachedNetworkImage(
-                      imageUrl: _getTipImage(tip['title']!),
-                      width: 80,
-                      height: 80,
-                      fit: BoxFit.cover,
-                      placeholder: (context, url) => Container(
-                        color: PolyBagColors.secondary,
-                        child: const Icon(Icons.chair, color: Colors.white70),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: 100,
+                        height: 100,
+                        decoration: BoxDecoration(
+                          color: PolyBagColors.secondary,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: const Icon(Icons.person_outline, color: Colors.white70, size: 50),
                       ),
-                      errorWidget: (context, url, error) => Container(
-                        color: PolyBagColors.secondary,
-                        child: const Icon(Icons.help_outline, color: Colors.white70),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: Text(
                           tip['title']!,
-                          style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
+                          style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700, color: PolyBagColors.primary),
                         ),
-                        const SizedBox(height: 8),
-                        Text(
-                          tip['desc']!,
-                          style: theme.textTheme.bodyMedium,
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
+                  const SizedBox(height: 16),
+                  Text(
+                    tip['desc']!,
+                    style: theme.textTheme.bodyLarge?.copyWith(height: 1.5),
+                  ),
+                  const SizedBox(height: 20),
+                  ExpansionTile(
+                    title: const Text('Jak na to?', style: TextStyle(fontWeight: FontWeight.w600, color: PolyBagColors.primary)),
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(12),
+                        child: _buildBulletList(tip['jakNaTo']!),
+                      ),
+                    ],
+                  ),
+                  ExpansionTile(
+                    title: const Text('Na co si dát pozor?', style: TextStyle(fontWeight: FontWeight.w600, color: PolyBagColors.error)),
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(12),
+                        child: _buildBulletList(tip['pozor']!),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
                 ],
               ),
             ),
@@ -111,17 +122,13 @@ class _SittingScreenState extends State<SittingScreen> {
     );
   }
 
-  String _getTipImage(String title) {
-    // Placeholder images from Unsplash (ergonomics theme)
-    final images = {
-      'Nohy na zemi': 'https://images.unsplash.com/photo-1581578731548-67da953d1a8e?w=300&h=300&fit=crop',
-      'Záda rovná': 'https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=300&h=300&fit=crop',
-      'Lokty v 90°': 'https://images.unsplash.com/photo-1587978083180-b74c7b9e3c2a?w=300&h=300&fit=crop',
-      'Pohled dopředu': 'https://images.unsplash.com/photo-1517433456452-f9633a875f6f?w=300&h=300&fit=crop',
-      'Přestávky': 'https://images.unsplash.com/photo-1506869640315-07166e15582d?w=300&h=300&fit=crop',
-      'Hydratace': 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=300&h=300&fit=crop',
-    };
-    return images[title] ?? 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop';
+  Widget _buildBulletList(String text) {
+    return Text(
+      text.replaceAll('\\n', '\n'),
+      style: const TextStyle(height: 1.6),
+    );
   }
+
+  // Placeholder for images (no network)
 }
 
