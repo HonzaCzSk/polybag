@@ -1,6 +1,7 @@
 // ignore_for_file: unnecessary_to_list_in_spreads
 
 import 'package:flutter/material.dart';
+import 'package:polybag/widgets/video_hero.dart';
 import '../../utils/seo.dart';
 import '../../utils/constants.dart';
 import '../../theme.dart';
@@ -30,12 +31,12 @@ class _SittingScreenState extends State<SittingScreen> {
         padding: const EdgeInsets.all(16),
         children: [
           Text(
-            'Správná poloha při sezení',
+            'Správné držení těla při sezení a postojích',
             style: theme.textTheme.headlineMedium,
           ),
           const SizedBox(height: 16),
           Text(
-            'Zde jsou klíčové tipy pro zdravé sezení během celého dne. Aplikuj je postupně!',
+            'Zde jsou klíčové tipy pro zdravé sezení a stání během celého dne. Aplikuj je postupně!',
             style: theme.textTheme.bodyMedium,
           ),
           const SizedBox(height: 24),
@@ -48,14 +49,26 @@ class _SittingScreenState extends State<SittingScreen> {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                        width: 100,
-                        height: 100,
-                        decoration: BoxDecoration(
-                          color: PolyBagColors.secondary,
-                          borderRadius: BorderRadius.circular(12),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => VideoPlaceholderPage(
+                                videoPath: PolyBagStrings.getVideoPath(tip['title']!),
+                                title: tip['title']!,
+                              ),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          width: 100,
+                          height: 100,
+                          decoration: BoxDecoration(
+                            color: PolyBagColors.secondary,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: const Icon(Icons.person_outline, color: Colors.white70, size: 50),
                         ),
-                        child: const Icon(Icons.person_outline, color: Colors.white70, size: 50),
                       ),
                       const SizedBox(width: 16),
                       Expanded(
@@ -128,7 +141,4 @@ class _SittingScreenState extends State<SittingScreen> {
       style: const TextStyle(height: 1.6),
     );
   }
-
-  // Placeholder for images (no network)
 }
-

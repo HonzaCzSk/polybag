@@ -38,8 +38,8 @@ class NavShell extends StatelessWidget {
         destinations: const [
           NavigationDestination(
             icon: Icon(Icons.chair_outlined),
-            selectedIcon: Icon(Icons.chair),
-            label: 'Sezení',
+            selectedIcon: Icon(Icons.person),
+            label: 'Postoj a sezení',
           ),
           NavigationDestination(
             icon: Icon(Icons.fitness_center_outlined),

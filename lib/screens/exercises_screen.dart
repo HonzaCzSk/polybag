@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../utils/seo.dart';
 import '../../utils/constants.dart';
 import '../../theme.dart';
+import '../widgets/video_hero.dart';
 
 class ExercisesScreen extends StatefulWidget {
   const ExercisesScreen({super.key});
@@ -48,14 +49,26 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                        width: 100,
-                        height: 100,
-                        decoration: BoxDecoration(
-                          color: PolyBagColors.secondary,
-                          borderRadius: BorderRadius.circular(12),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => VideoPlaceholderPage(
+                                videoPath: PolyBagStrings.getVideoPath(ex['title']!),
+                                title: ex['title']!,
+                              ),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          width: 100,
+                          height: 100,
+                          decoration: BoxDecoration(
+                            color: PolyBagColors.secondary,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: const Icon(Icons.fitness_center, color: Colors.white70, size: 50),
                         ),
-                        child: const Icon(Icons.fitness_center, color: Colors.white70, size: 50),
                       ),
                       const SizedBox(width: 16),
                       Expanded(
@@ -128,7 +141,4 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
       style: const TextStyle(height: 1.6),
     );
   }
-
-  // Placeholder for images (no network)
 }
-

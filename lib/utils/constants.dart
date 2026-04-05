@@ -1,13 +1,26 @@
 // Central constants for strings - enables future localization
 
 class PolyBagStrings {
+  static String getVideoPath(String title) {
+    String normalized = title.toLowerCase()
+        .replaceAll('á', 'a')
+        .replaceAll('č', 'c')
+        .replaceAll('é', 'e')
+        .replaceAll('í', 'i')
+        .replaceAll('ě', 'e')
+        .replaceAll('ů', 'u')
+        .replaceAll('ů', 'u')
+        .replaceAll('–', ' ')
+        .trim();
+    return 'assets/videos/$normalized.mp4';
+  }
   // Titles
   static const String appTitle = 'PolyBag';
   static const String healthySitting = 'Zdravé sezení';
   
   // Screens
   static const String whatInterestsYou = 'Co tě zajímá?';
-  static const String correctSitting = 'Jak správně sedět';
+  static const String correctSitting = 'Správné držení těla';
   static const String sittingSubtitle = 'Ergonomie a tipy';
   static const String exercises = 'Kompenzační cvičení';
   static const String exercisesSubtitle = 'Cviky pro záda';

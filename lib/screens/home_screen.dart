@@ -68,9 +68,9 @@ class HomeScreen extends StatelessWidget {
                   crossAxisSpacing: 14,
                   children: const [
                     _MenuCard(
-                      icon: Icons.chair,
-                      title: 'Jak správně\nsedět',
-                      subtitle: 'Ergonomie a tipy',
+                      icon: Icons.person,
+                      title: 'Správné držení těla',
+                      subtitle: 'Postoj a sezení',
                       route: '/sedeni',
                       color: Color(0xFF40CDBB),
                     ),
