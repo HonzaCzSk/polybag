@@ -1,102 +1,104 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
 import 'package:video_player/video_player.dart';
 import 'package:chewie/chewie.dart';
 
-class VideoHero extends StatefulWidget {
+/// Ikonka s tlačítkem play. Po kliknutí otevře fullscreen video player.
+/// [videoFile] = název souboru BEZ přípony, např. 'bird_dog'
+/// [title]     = zobrazovaný název v AppBaru videa
+class VideoHero extends StatelessWidget {
+  final String videoFile;
   final String title;
 
   const VideoHero({
     super.key,
+    required this.videoFile,
     required this.title,
   });
 
   @override
-  State<VideoHero> createState() => _VideoHeroState();
-}
-
-class _VideoHeroState extends State<VideoHero> {
-  VideoPlayerController? _controller;
-  ChewieController? _chewieController;
-  bool _isInitialized = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _initializePlayer();
-  }
-
-  Future<void> _initializePlayer() async {
-    final filename = _getFilename();
-    _controller = VideoPlayerController.asset('assets/videos/$filename.mp4');
-    try {
-      await _controller!.initialize();
-      _chewieController = ChewieController(
-        videoPlayerController: _controller!,
-        autoPlay: true,
-        looping: true,
-      );
-    } catch (error) {
-      print('Video init error for $filename: $error');
-    }
-    if (mounted) {
-      setState(() {
-        _isInitialized = true;
-      });
-    }
-  }
-
-  String _getFilename() {
-    final lower = widget.title.toLowerCase();
-    return lower.replaceAll('á', 'a')
-      .replaceAll('č', 'c')
-      .replaceAll('é', 'e')
-      .replaceAll('í', 'i')
-      .replaceAll('ě', 'e')
-      .replaceAll('ů', 'u')
-      .replaceAll('–', ' ')
-      .trim();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Hero(
-      tag: widget.title,
+      tag: 'video_$videoFile',
       child: GestureDetector(
-        onTap: _isInitialized && _controller!.value.isInitialized
-          ? () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => Scaffold(
-                  appBar: AppBar(
-                    title: Text(widget.title),
-                    automaticallyImplyLeading: false,
-                  ),
-                  body: Chewie(controller: _chewieController!),
-                ),
-              ),
-            )
-          : null,
+        onTap: () => Navigator.of(context, rootNavigator: true).push(
+          MaterialPageRoute(
+            builder: (_) => _VideoPlayerScreen(
+              title: title,
+              videoFile: videoFile,
+            ),
+          ),
+        ),
         child: Container(
           width: 100,
           height: 100,
           decoration: BoxDecoration(
-            color: Colors.blue,
+            color: Colors.blueGrey.shade700,
             borderRadius: BorderRadius.circular(12),
           ),
-          child: _isInitialized && _controller != null && _controller!.value.isInitialized
-            ? ClipRRect(
-                borderRadius: BorderRadius.circular(12),
-                child: Chewie(controller: _chewieController!),
-              )
-              : const Icon(
-                Icons.play_circle_outline,
-                color: Colors.white,
-                size: 50,
-              ),
+          child: const Icon(
+            Icons.play_circle_outline_rounded,
+            color: Colors.white,
+            size: 52,
+          ),
         ),
       ),
     );
+  }
+}
+
+class _VideoPlayerScreen extends StatefulWidget {
+  final String title;
+  final String videoFile;
+
+  const _VideoPlayerScreen({
+    required this.title,
+    required this.videoFile,
+  });
+
+  @override
+  State<_VideoPlayerScreen> createState() => _VideoPlayerScreenState();
+}
+
+class _VideoPlayerScreenState extends State<_VideoPlayerScreen> {
+  VideoPlayerController? _controller;
+  ChewieController? _chewieController;
+  bool _isInitialized = false;
+  String? _error;
+
+  @override
+  void initState() {
+    super.initState();
+    _initPlayer();
+  }
+
+  Future<void> _initPlayer() async {
+    try {
+      final VideoPlayerController controller;
+      final path = 'assets/videos/${widget.videoFile}.mp4';
+
+      if (kIsWeb) {
+        // Na webu (PWA) asset() nefunguje – assety jsou servovány jako HTTP soubory
+        controller = VideoPlayerController.networkUrl(Uri.parse(path));
+      } else {
+        controller = VideoPlayerController.asset(path);
+      }
+
+      _controller = controller;
+      await _controller!.initialize();
+
+      _chewieController = ChewieController(
+        videoPlayerController: _controller!,
+        autoPlay: true,
+        looping: false,
+        allowFullScreen: true,
+        showControls: true,
+      );
+
+      if (mounted) setState(() => _isInitialized = true);
+    } catch (e) {
+      if (mounted) setState(() => _error = e.toString());
+    }
   }
 
   @override
@@ -104,5 +106,53 @@ class _VideoHeroState extends State<VideoHero> {
     _chewieController?.dispose();
     _controller?.dispose();
     super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text(widget.title),
+      automaticallyImplyLeading: false,
+      leading: BackButton(onPressed: () => Navigator.of(context).pop())),
+      body: Center(
+        child: _error != null
+            ? _buildError()
+            : !_isInitialized
+                ? const CircularProgressIndicator()
+                : Hero(
+                    tag: 'video_${widget.videoFile}',
+                    child: Chewie(controller: _chewieController!),
+                  ),
+      ),
+    );
+  }
+
+  Widget _buildError() {
+    return Padding(
+      padding: const EdgeInsets.all(32),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Icon(Icons.error_outline, size: 64, color: Colors.red),
+          const SizedBox(height: 16),
+          Text(
+            'Video se nepodařilo načíst',
+            style: Theme.of(context).textTheme.titleMedium,
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'assets/videos/${widget.videoFile}.mp4',
+            style: const TextStyle(color: Colors.grey, fontSize: 12),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            _error!,
+            style: const TextStyle(color: Colors.grey, fontSize: 11),
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
+    );
   }
 }

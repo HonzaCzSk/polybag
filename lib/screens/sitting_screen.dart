@@ -56,7 +56,10 @@ class _SittingScreenState extends State<SittingScreen> {
                           color: PolyBagColors.secondary,
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        child: VideoHero(title: tip['title']!),
+                        child: VideoHero(
+                          videoFile: tip['video']!,
+                          title: tip['title']!,
+                        ),
                       ),
                       const SizedBox(width: 16),
                       Expanded(
@@ -130,4 +133,3 @@ class _SittingScreenState extends State<SittingScreen> {
     );
   }
 }
-

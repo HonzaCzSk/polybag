@@ -56,7 +56,10 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
                           color: PolyBagColors.secondary,
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        child: VideoHero(title: ex['title']!),
+                        child: VideoHero(
+                          videoFile: ex['video']!,
+                          title: ex['title']!,
+                        ),
                       ),
                       const SizedBox(width: 16),
                       Expanded(
@@ -130,4 +133,3 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
     );
   }
 }
-
