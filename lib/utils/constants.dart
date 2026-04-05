@@ -1,19 +1,26 @@
 // Central constants for strings - enables future localization
 
 class PolyBagStrings {
-  static String getVideoPath(String title) {
-    String normalized = title.toLowerCase()
-        .replaceAll('á', 'a')
-        .replaceAll('č', 'c')
-        .replaceAll('é', 'e')
-        .replaceAll('í', 'i')
-        .replaceAll('ě', 'e')
-        .replaceAll('ů', 'u')
-        .replaceAll('ů', 'u')
-        .replaceAll('–', ' ')
-        .trim();
-    return 'assets/videos/$normalized.mp4';
-  }
+
+  // Video Titles
+  static const String birdDog = 'bird_dog';
+  static const String bocniUklonNaZidli = 'bocni_uklon_na_zidli';
+  static const String bocniUklon = 'bocni_uklon';
+  static const String kociciHrbet = 'kocici_hrbet';
+
+  static const String podsazeniPanve = 'podsazeni_panve';
+  static const String poziceDitete = 'pozice_ditete';
+  static const String pritahovaniKolena = 'pritahovani_kolena';
+  static const String rotaceHrudnikuSPokladanimPaze = 'rotace_hrudniku_s_pokladanim_paze';
+  static const String rotaceHrudnikuVKlece = 'rotace_hrudniku_v_klece';
+  static const String rotaceTrupuNaZidli = 'rotace_trupu_na_zidli';
+  static const String twist = 'twist';
+
+  static const String spravneSezeni = 'spravne_sezeni';
+  static const String spravnyPostoj = 'spravny_postoj';
+
+  static const String uvolneniDoRotace = 'uvolneni_do_rotace';
+
   // Titles
   static const String appTitle = 'PolyBag';
   static const String healthySitting = 'Zdravé sezení';

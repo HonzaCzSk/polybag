@@ -49,26 +49,14 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => VideoPlaceholderPage(
-                                videoPath: PolyBagStrings.getVideoPath(ex['title']!),
-                                title: ex['title']!,
-                              ),
-                            ),
-                          );
-                        },
-                        child: Container(
-                          width: 100,
-                          height: 100,
-                          decoration: BoxDecoration(
-                            color: PolyBagColors.secondary,
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: const Icon(Icons.fitness_center, color: Colors.white70, size: 50),
+                      Container(
+                        width: 100,
+                        height: 100,
+                        decoration: BoxDecoration(
+                          color: PolyBagColors.secondary,
+                          borderRadius: BorderRadius.circular(12),
                         ),
+                        child: VideoHero(title: ex['title']!),
                       ),
                       const SizedBox(width: 16),
                       Expanded(
@@ -142,3 +130,4 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
     );
   }
 }
+

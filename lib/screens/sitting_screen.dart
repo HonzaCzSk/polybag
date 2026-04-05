@@ -1,10 +1,10 @@
 // ignore_for_file: unnecessary_to_list_in_spreads
 
 import 'package:flutter/material.dart';
-import 'package:polybag/widgets/video_hero.dart';
 import '../../utils/seo.dart';
 import '../../utils/constants.dart';
 import '../../theme.dart';
+import '../widgets/video_hero.dart';
 
 class SittingScreen extends StatefulWidget {
   const SittingScreen({super.key});
@@ -49,26 +49,14 @@ class _SittingScreenState extends State<SittingScreen> {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => VideoPlaceholderPage(
-                                videoPath: PolyBagStrings.getVideoPath(tip['title']!),
-                                title: tip['title']!,
-                              ),
-                            ),
-                          );
-                        },
-                        child: Container(
-                          width: 100,
-                          height: 100,
-                          decoration: BoxDecoration(
-                            color: PolyBagColors.secondary,
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: const Icon(Icons.person_outline, color: Colors.white70, size: 50),
+                      Container(
+                        width: 100,
+                        height: 100,
+                        decoration: BoxDecoration(
+                          color: PolyBagColors.secondary,
+                          borderRadius: BorderRadius.circular(12),
                         ),
+                        child: VideoHero(title: tip['title']!),
                       ),
                       const SizedBox(width: 16),
                       Expanded(
@@ -142,3 +130,4 @@ class _SittingScreenState extends State<SittingScreen> {
     );
   }
 }
+
