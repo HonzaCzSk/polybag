@@ -75,11 +75,11 @@ class _VideoPlayerScreenState extends State<_VideoPlayerScreen> {
   Future<void> _initPlayer() async {
     try {
       final VideoPlayerController controller;
-      final path = 'assets/videos/${widget.videoFile}.mp4';
+      final path = 'assets/assets/videos/${widget.videoFile}.mp4';
 
       if (kIsWeb) {
         // Na webu (PWA) asset() nefunguje – assety jsou servovány jako HTTP soubory
-        controller = VideoPlayerController.networkUrl(Uri.parse(path));
+        controller = VideoPlayerController.networkUrl(Uri.base.resolve(path));
       } else {
         controller = VideoPlayerController.asset(path);
       }
