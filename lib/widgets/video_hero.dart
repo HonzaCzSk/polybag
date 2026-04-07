@@ -75,14 +75,14 @@ class _VideoPlayerScreenState extends State<_VideoPlayerScreen> {
   Future<void> _initPlayer() async {
     try {
       final VideoPlayerController controller;
-      final path = 'assets/assets/videos/${widget.videoFile}.mp4';
+      final path = 'videos/${widget.videoFile}.mp4';
 
-      if (kIsWeb) {
-        // Na webu (PWA) asset() nefunguje – assety jsou servovány jako HTTP soubory
-        controller = VideoPlayerController.networkUrl(Uri.base.resolve(path));
-      } else {
-        controller = VideoPlayerController.asset(path);
-      }
+    if (kIsWeb) {
+      final url = 'https://polybag.cz/app/assets/$path';
+      controller = VideoPlayerController.networkUrl(Uri.parse(url));
+    } else {
+      controller = VideoPlayerController.asset(path);
+    }
 
       _controller = controller;
       await _controller!.initialize();
