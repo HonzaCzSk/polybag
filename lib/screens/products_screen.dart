@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../utils/seo.dart';
+import '../lang/app_localizations.dart';
 
 class ProductsScreen extends StatefulWidget {
   const ProductsScreen({super.key});
@@ -27,23 +28,21 @@ class _ProductsScreenState extends State<ProductsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context);
     final theme = Theme.of(context);
     return Scaffold(
-      appBar: AppBar(title: const Text('Nabídka produktů')),
+      appBar: AppBar(title: Text(loc.products)),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          Text('Naše produkty', style: theme.textTheme.headlineMedium),
+          Text(loc.productsHeading, style: theme.textTheme.headlineMedium),
           const SizedBox(height: 12),
-          Text(
-            'Podsedáky a sedací pytle z recyklovaných bigbagů, vyráběné v chráněné dílně Daneta.',
-            style: theme.textTheme.bodyMedium,
-          ),
+          Text(loc.productsDesc, style: theme.textTheme.bodyMedium),
           const SizedBox(height: 24),
           ElevatedButton.icon(
             onPressed: _openShop,
             icon: const Icon(Icons.open_in_new),
-            label: const Text('Přejít do e-shopu'),
+            label: Text(loc.goToShop),
           ),
         ],
       ),

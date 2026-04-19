@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../lang/app_localizations.dart';
+import 'lang_toggle.dart';
 
 class NavShell extends StatelessWidget {
   final Widget child;
@@ -16,13 +18,15 @@ class NavShell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          tooltip: 'Zpět na úvod',
+          tooltip: loc.backToHome,
           onPressed: () => context.go('/'),
         ),
+        actions: const [LangToggle()],
       ),
       body: child,
       bottomNavigationBar: NavigationBar(
@@ -35,27 +39,26 @@ class NavShell extends StatelessWidget {
             case 3: context.go('/o-nas');    break;
           }
         },
-        destinations: const [
+        destinations: [
           NavigationDestination(
-            icon: Icon(Icons.person_outline),
-            selectedIcon: Icon(Icons.person),
-
-            label: 'Postoj a sezení',
+            icon: const Icon(Icons.person_outline),
+            selectedIcon: const Icon(Icons.person),
+            label: loc.navPosture,
           ),
           NavigationDestination(
-            icon: Icon(Icons.fitness_center_outlined),
-            selectedIcon: Icon(Icons.fitness_center),
-            label: 'Cvičení',
+            icon: const Icon(Icons.fitness_center_outlined),
+            selectedIcon: const Icon(Icons.fitness_center),
+            label: loc.navExercises,
           ),
           NavigationDestination(
-            icon: Icon(Icons.shopping_bag_outlined),
-            selectedIcon: Icon(Icons.shopping_bag),
-            label: 'Produkty',
+            icon: const Icon(Icons.shopping_bag_outlined),
+            selectedIcon: const Icon(Icons.shopping_bag),
+            label: loc.navProducts,
           ),
           NavigationDestination(
-            icon: Icon(Icons.info_outline),
-            selectedIcon: Icon(Icons.info),
-            label: 'O nás',
+            icon: const Icon(Icons.info_outline),
+            selectedIcon: const Icon(Icons.info),
+            label: loc.navAbout,
           ),
         ],
       ),

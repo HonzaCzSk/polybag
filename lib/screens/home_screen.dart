@@ -3,13 +3,15 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../theme.dart';
-import '../utils/constants.dart';
+import '../lang/app_localizations.dart';
+import '../widgets/lang_toggle.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context);
     return Scaffold(
       backgroundColor: PolyBagColors.background,
       body: SafeArea(
@@ -19,7 +21,7 @@ class HomeScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 12),
-              // Logo + title
+              // Logo + title + lang toggle
               Row(
                 children: [
                   Image.asset(
@@ -36,27 +38,30 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 14),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        PolyBagStrings.appTitle,
-                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                          fontWeight: FontWeight.w800,
-                          color: PolyBagColors.primary,
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          loc.appTitle,
+                          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                            fontWeight: FontWeight.w800,
+                            color: PolyBagColors.primary,
+                          ),
                         ),
-                      ),
-                      Text(
-                        PolyBagStrings.healthySitting,
-                        style: Theme.of(context).textTheme.bodySmall,
-                      ),
-                    ],
+                        Text(
+                          loc.healthySitting,
+                          style: Theme.of(context).textTheme.bodySmall,
+                        ),
+                      ],
+                    ),
                   ),
+                  const LangToggle(),
                 ],
               ),
               const SizedBox(height: 32),
               Text(
-                PolyBagStrings.whatInterestsYou,
+                loc.whatInterestsYou,
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               const SizedBox(height: 16),
@@ -66,34 +71,34 @@ class HomeScreen extends StatelessWidget {
                   crossAxisCount: 2,
                   mainAxisSpacing: 14,
                   crossAxisSpacing: 14,
-                  children: const [
+                  children: [
                     _MenuCard(
                       icon: Icons.person,
-                      title: 'Správné držení těla',
-                      subtitle: 'Postoj a sezení',
+                      title: loc.cardPostureTitle,
+                      subtitle: loc.cardPostureSubtitle,
                       route: '/sedeni',
-                      color: Color(0xFF40CDBB),
+                      color: const Color(0xFF40CDBB),
                     ),
                     _MenuCard(
                       icon: Icons.fitness_center,
-                      title: 'Kompenzační\ncvičení',
-                      subtitle: 'Cviky pro záda',
+                      title: loc.cardExercisesTitle,
+                      subtitle: loc.cardExercisesSubtitle,
                       route: '/cviceni',
-                      color: Color(0xFF2AAFA0),
+                      color: const Color(0xFF2AAFA0),
                     ),
                     _MenuCard(
                       icon: Icons.shopping_bag,
-                      title: 'Nabídka\nproduktů',
-                      subtitle: 'Podsedáky a pytle',
+                      title: loc.cardProductsTitle,
+                      subtitle: loc.cardProductsSubtitle,
                       route: '/produkty',
-                      color: Color(0xFF40CDBB),
+                      color: const Color(0xFF40CDBB),
                     ),
                     _MenuCard(
                       icon: Icons.info,
-                      title: 'O nás',
-                      subtitle: 'Příběh PolyBag',
+                      title: loc.cardAboutTitle,
+                      subtitle: loc.cardAboutSubtitle,
                       route: '/o-nas',
-                      color: Color(0xFF2AAFA0),
+                      color: const Color(0xFF2AAFA0),
                     ),
                   ],
                 ),
@@ -132,7 +137,7 @@ class _MenuCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: color.withValues(alpha: color.alpha * 0.35), // Fix deprecation
+              color: color.withValues(alpha: color.alpha * 0.35),
               blurRadius: 12,
               offset: const Offset(0, 6),
             ),
@@ -160,7 +165,7 @@ class _MenuCard extends StatelessWidget {
                 Text(
                   subtitle,
                   style: TextStyle(
-                    color: Colors.white.withValues(alpha: 0.8), // Fix deprecation
+                    color: Colors.white.withValues(alpha: 0.8),
                     fontSize: 12,
                   ),
                 ),
@@ -172,4 +177,3 @@ class _MenuCard extends StatelessWidget {
     );
   }
 }
-

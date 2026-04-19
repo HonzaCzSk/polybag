@@ -10,6 +10,7 @@ assignees: HonzaCzSk
 Stručný popis toho, co se stalo.
 
 **Kroky k reprodukci**
+
 1. Přejdi na '...'
 2. Klikni na '...'
 3. Scrolluj dolů na '...'
@@ -22,6 +23,7 @@ Co jsi očekával, že se stane.
 Pokud je to možné, přidej screenshot.
 
 **Zařízení:**
+
 - Zařízení: [např. iPhone 14, Samsung Galaxy S23]
 - OS: [např. iOS 17, Android 14]
 - Prohlížeč: [např. Chrome, Safari]

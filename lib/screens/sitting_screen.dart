@@ -1,9 +1,9 @@
 // ignore_for_file: unnecessary_to_list_in_spreads
 
 import 'package:flutter/material.dart';
-import '../../utils/seo.dart';
-import '../../utils/constants.dart';
-import '../../theme.dart';
+import '../utils/seo.dart';
+import '../lang/app_localizations.dart';
+import '../theme.dart';
 import '../widgets/video_hero.dart';
 
 class SittingScreen extends StatefulWidget {
@@ -17,30 +17,25 @@ class _SittingScreenState extends State<SittingScreen> {
   void initState() {
     super.initState();
     SeoHelper.set(
-      title: '${PolyBagStrings.correctSitting} – ${PolyBagStrings.appTitle}',
+      title: 'Správné držení těla – PolyBag',
       description: 'Tipy na ergonomii, správné držení těla a čemu se vyhnout při dlouhém sezení.',
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context);
     final theme = Theme.of(context);
     return Scaffold(
-      appBar: AppBar(title: const Text(PolyBagStrings.correctSitting)),
+      appBar: AppBar(title: Text(loc.correctSitting)),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          Text(
-            'Správné držení těla při sezení a postojích',
-            style: theme.textTheme.headlineMedium,
-          ),
+          Text(loc.sittingHeading, style: theme.textTheme.headlineMedium),
           const SizedBox(height: 16),
-          Text(
-            'Zde jsou klíčové tipy pro zdravé sezení a stání během celého dne. Aplikuj je postupně!',
-            style: theme.textTheme.bodyMedium,
-          ),
+          Text(loc.sittingSubtext, style: theme.textTheme.bodyMedium),
           const SizedBox(height: 24),
-          ...PolyBagStrings.sittingTips.map((tip) => Card(
+          ...loc.sittingTips.map((tip) => Card(
             child: Padding(
               padding: const EdgeInsets.all(16),
               child: Column(
@@ -65,7 +60,10 @@ class _SittingScreenState extends State<SittingScreen> {
                       Expanded(
                         child: Text(
                           tip['title']!,
-                          style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700, color: PolyBagColors.primary),
+                          style: theme.textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.w700,
+                            color: PolyBagColors.primary,
+                          ),
                         ),
                       ),
                     ],
@@ -77,7 +75,13 @@ class _SittingScreenState extends State<SittingScreen> {
                   ),
                   const SizedBox(height: 20),
                   ExpansionTile(
-                    title: const Text('Jak na to?', style: TextStyle(fontWeight: FontWeight.w600, color: PolyBagColors.primary)),
+                    title: Text(
+                      loc.howToDoIt,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w600,
+                        color: PolyBagColors.primary,
+                      ),
+                    ),
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(12),
@@ -86,7 +90,13 @@ class _SittingScreenState extends State<SittingScreen> {
                     ],
                   ),
                   ExpansionTile(
-                    title: const Text('Na co si dát pozor?', style: TextStyle(fontWeight: FontWeight.w600, color: PolyBagColors.error)),
+                    title: Text(
+                      loc.watchOutFor,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w600,
+                        color: PolyBagColors.error,
+                      ),
+                    ),
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(12),
@@ -107,13 +117,10 @@ class _SittingScreenState extends State<SittingScreen> {
                 children: [
                   const Icon(Icons.lightbulb, size: 48, color: PolyBagColors.primary),
                   const SizedBox(height: 12),
-                  Text(
-                    'Pro lepší výsledky',
-                    style: theme.textTheme.titleLarge,
-                  ),
+                  Text(loc.sittingTipTitle, style: theme.textTheme.titleLarge),
                   const SizedBox(height: 8),
                   Text(
-                    'Kombinuj s kompenzačními cvičeními a podsedákem PolyBag!',
+                    loc.sittingTipText,
                     style: theme.textTheme.bodyMedium,
                     textAlign: TextAlign.center,
                   ),

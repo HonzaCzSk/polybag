@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../utils/seo.dart';
+import '../lang/app_localizations.dart';
 
 class AboutScreen extends StatefulWidget {
   const AboutScreen({super.key});
@@ -27,21 +28,18 @@ class _AboutScreenState extends State<AboutScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context);
     final theme = Theme.of(context);
     return Scaffold(
-      appBar: AppBar(title: const Text('O nás')),
+      appBar: AppBar(title: Text(loc.about)),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
           Text('PolyBag', style: theme.textTheme.headlineMedium),
           const SizedBox(height: 12),
-          Text(
-            'Vyrábíme podsedáky a sedací pytle z recyklovaných polypropylenových bigbagů. '
-            'Každý výrobek vzniká v lokální chráněné dílně Daneta, která zaměstnává osoby se zdravotním postižením.',
-            style: theme.textTheme.bodyMedium,
-          ),
+          Text(loc.aboutDesc, style: theme.textTheme.bodyMedium),
           const SizedBox(height: 24),
-          Text('Kontakt', style: theme.textTheme.titleMedium),
+          Text(loc.contact, style: theme.textTheme.titleMedium),
           const SizedBox(height: 8),
           ListTile(
             leading: const Icon(Icons.email_outlined),
@@ -55,7 +53,7 @@ class _AboutScreenState extends State<AboutScreen> {
             contentPadding: EdgeInsets.zero,
           ),
           const SizedBox(height: 24),
-          Text('Sledujte nás', style: theme.textTheme.titleMedium),
+          Text(loc.followUs, style: theme.textTheme.titleMedium),
           const SizedBox(height: 8),
           Wrap(
             spacing: 12,
@@ -80,10 +78,7 @@ class _AboutScreenState extends State<AboutScreen> {
           const SizedBox(height: 24),
           Text('Daneta', style: theme.textTheme.titleMedium),
           const SizedBox(height: 8),
-          Text(
-            'Koupí produktu podporujete chráněnou dílnu Daneta – organizaci pomáhající osobám s hendikepem.',
-            style: theme.textTheme.bodyMedium,
-          ),
+          Text(loc.danetaDesc, style: theme.textTheme.bodyMedium),
         ],
       ),
     );
