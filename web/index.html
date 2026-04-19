@@ -75,6 +75,19 @@
     });
   </script>
 
+  <script>
+    _flutter.loader.load({
+      onEntrypointLoaded: async function(engineInitializer) {
+        const config = {
+          renderer: "html",
+        };
+
+        const appRunner = await engineInitializer.initializeEngine(config);
+        await appRunner.runApp();
+      }
+    })
+  </script>
+
   <!-- v0.1.0 — bump this version string on every deploy to bust the cache -->
   <script src="flutter_bootstrap.js?v=0.1.0" async></script>
 </body>
